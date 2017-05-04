@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<configuration>
+    <parse_library>metal</parse_library><!-- currently only metal is supported -->
+    <packets_input_library>jnetpcap</packets_input_library><!-- metal or jnetpcap library-->
+    <live>false</live><!-- true or false-->
+    <timer>true</timer><!-- true or false-->
+    <input>56packets.pcap</input><!-- existing file or device (live stream, full path required)-->
+    <file_size>120</file_size><!-- optional, size of the file in MB for live streams 120 MB is default-->
+    <output_directory>pef_data</output_directory><!-- directory for file storage-->
+    <output_file>tests.pcap</output_file><!-- output file name, default.pcap is the default-->
+    <log_file>log.txt</log_file><!-- log file name, further options are not yet supported -->
+    <!-- needed or default true? <remove_unknown_protocols>true</remove_unknown_protocols>-->
+    <!-- needed or default true? <remove_failing_packets>true</remove_failing_packets>-->
+    <!-- needed or default true? 0 if valid, 1 of invalid <checksum_reset>true</checksum_reset>-->
+    <fields>
+        <field>
+            <constraint>IPV4_UDP_DNS</constraint><!-- constraints as in constraints.java -->
+            <name>ipsource</name><!-- name inside the metal protocol definition -->
+            <!-- usually null, not implemented yet. <expression></expression>-->
+            <algorithm>
+                <name>FFX_IPV4ADDRESS</name><!-- algorithm parsevalueprocessor to be selected,  -->
+                <params>
+                    <param>
+                        <name>key</name><!-- first parameter for algorithm selected -->
+                        <value>30313233343536373839414243444546</value><!-- value for the first parameter -->
+                        <type>java.lang.String</type><!--java type of the value -->
+                    </param>
+                    <param>
+                        <name>mask</name><!-- second parameter for algorithm selected -->
+                        <value>16</value>
+                        <type>java.lang.Integer</type>
+                    </param>
+                </params>
+            </algorithm>
+        </field>
+        <field>
+            <constraint>IPV4_UDP_DNS</constraint>
+            <name>ipdestination</name>
+            <algorithm>
+                <name>FFX_IPV4ADDRESS</name>
+                <params>
+                    <param>
+                        <name>key</name>
+                        <value>30313233343536373839414243444546</value>
+                        <type>java.lang.String</type>
+                    </param>
+                    <param>
+                        <name>mask</name>
+                        <value>16</value>
+                        <type>java.lang.Integer</type>
+                    </param>
+                </params>
+            </algorithm>
+        </field>
+        <field>
+            <constraint>IPV6_UDP_DNS</constraint>
+            <name>ipsource</name>
+            <algorithm>
+                <name>FFX_IPV6ADDRESS</name>
+                <params>
+                    <param>
+                        <name>key</name>
+                        <value>0123456789ABCDEF0123456789ABCDEF</value>
+                        <type>java.lang.String</type>
+                    </param>
+                    <param>
+                        <name>mask</name>
+                        <value>32</value>
+                        <type>java.lang.Integer</type>
+                    </param>
+                </params>
+            </algorithm>
+            <expression></expression>
+        </field>
+        <field>
+            <constraint>IPV6_UDP_DNS</constraint>
+            <name>ipdestination</name>
+            <algorithm>
+                <name>FFX_IPV6ADDRESS</name>
+                <params>
+                    <param>
+                        <name>key</name>
+                        <value>0123456789ABCDEF0123456789ABCDEF</value>
+                        <type>java.lang.String</type>
+                    </param>
+                    <param>
+                        <name>mask</name>
+                        <value>32</value>
+                        <type>java.lang.Integer</type>
+                    </param>
+                </params>
+            </algorithm>
+        </field>
+    </fields>
+</configuration>

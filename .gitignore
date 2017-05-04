@@ -1,0 +1,32 @@
+## maven specific ##
+*.log
+target/
+**/target/
+build/
+
+## java specific ##
+*.class
+
+## Package Files ##
+*.jar
+*.war
+*.ear
+
+## eclipse specific ##
+.classpath
+.project
+.wtpmodules
+.settings
+.checkstyle
+
+## Intellij ##
+.idea/
+*.iml
+*.iws
+
+## MacOSX ##
+.DS_Store
+
+## created by tests ##
+pseudo-capture-file.cap
+src/test/resources/pcaps/dummy.pcap
